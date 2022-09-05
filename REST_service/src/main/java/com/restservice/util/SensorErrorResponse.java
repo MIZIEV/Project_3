@@ -1,10 +1,10 @@
 package com.restservice.util;
 
-public class SensorAlreadyExistsResponse {
+public class SensorErrorResponse {
     private String errorMessage;
     private long timeStamp;
 
-    public SensorAlreadyExistsResponse(String errorMessage, long timeStamp) {
+    public SensorErrorResponse(String errorMessage, long timeStamp) {
         this.errorMessage = errorMessage;
         this.timeStamp = timeStamp;
     }
