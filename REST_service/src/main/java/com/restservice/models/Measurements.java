@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "measurements")
+@Table(name = "measurement")
 public class Measurements {
 
     @Id
@@ -13,16 +13,20 @@ public class Measurements {
     private int id;
 
     @Column(name = "temperature")
-    @NotEmpty(message = "The temperature mustn't be empty ")
+    //@NotEmpty(message = "The temperature mustn't be empty ")
     private int temperature;
 
     @Column(name = "is_rain")
     private boolean isRain;
 
+    @ManyToOne
+    @JoinColumn(name = "sensor_id",referencedColumnName = "id")
+    private Sensor sensor;
+
     public Measurements(){}
 
-    public Measurements(int id, int temperature, boolean isRain) {
-        this.id = id;
+    public Measurements(Sensor sensor, int temperature, boolean isRain) {
+        this.sensor=sensor;
         this.temperature = temperature;
         this.isRain = isRain;
     }
@@ -49,5 +53,13 @@ public class Measurements {
 
     public void setRain(boolean rain) {
         isRain = rain;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 }
