@@ -1,4 +1,4 @@
-package com.restservice.util;
+package com.restservice.util.exceptions;
 
 public class SensorAlreadyExistsException extends RuntimeException{
 
