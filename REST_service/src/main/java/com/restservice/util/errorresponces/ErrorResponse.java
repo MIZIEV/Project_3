@@ -1,10 +1,10 @@
-package com.restservice.util;
+package com.restservice.util.errorresponces;
 
-public class SensorErrorResponse {
+public class ErrorResponse {
     private String errorMessage;
     private long timeStamp;
 
-    public SensorErrorResponse(String errorMessage, long timeStamp) {
+    public ErrorResponse(String errorMessage, long timeStamp) {
         this.errorMessage = errorMessage;
         this.timeStamp = timeStamp;
     }
