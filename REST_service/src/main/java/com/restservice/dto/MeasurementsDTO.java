@@ -4,19 +4,17 @@ import com.restservice.models.Sensor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class MeasurementsDTO {
 
-    @NotEmpty(message = "The temperature mustn't be empty ")
-    @Min(value = -60,message = "Min value must be higher than -60")
-    @Max(value = 60,message = "Man value must be smaller than 60")
+    @Min(value = -60, message = "Min value must be higher than -60")
+    @Max(value = 60, message = "Max value must be smaller than 60")
     private int temperature;
 
-    @NotEmpty(message = "This field mustn't be empty")
+    @NotNull
     private boolean isRain;
-
-    @NotEmpty(message = "Sensor not registered")
+    @NotNull(message = "Sensor doesn't registered. Register them")
     private Sensor sensor;
 
     public MeasurementsDTO() {
