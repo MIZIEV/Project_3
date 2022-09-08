@@ -3,10 +3,12 @@ package com.restservice.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -14,9 +16,11 @@ public class Sensor {
     private int id;
 
     @Column(name="name")
-    @NotEmpty(message = "Sensor name mustn't be empty")
-    @Size(min = 2,max = 20,message = "Sensor name size must be between 2 and 20 characters!!!")
+
     private String name;
+
+    @OneToMany(mappedBy = "sensor")
+    private List<Measurements> measurementsList;
 
     public Sensor(){}
 
@@ -39,5 +43,23 @@ public class Sensor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Measurements> getMeasurementsList() {
+        return measurementsList;
+    }
+
+    public void setMeasurementsList(List<Measurements> measurementsList) {
+        this.measurementsList = measurementsList;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
