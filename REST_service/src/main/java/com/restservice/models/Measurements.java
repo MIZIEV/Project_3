@@ -1,6 +1,8 @@
 package com.restservice.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -13,7 +15,8 @@ public class Measurements {
     private int id;
 
     @Column(name = "temperature")
-    //@NotEmpty(message = "The temperature mustn't be empty ")
+    @Min(value = -60,message = "Min value must be higher than -60")
+    @Max(value = 60,message = "Man value must be smaller than 60")
     private int temperature;
 
     @Column(name = "is_rain")
