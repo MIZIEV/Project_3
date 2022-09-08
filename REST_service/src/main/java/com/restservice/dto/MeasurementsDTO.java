@@ -1,21 +1,29 @@
 package com.restservice.dto;
 
-import javax.persistence.Column;
+import com.restservice.models.Sensor;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 public class MeasurementsDTO {
 
-    @Column(name = "temperature")
     @NotEmpty(message = "The temperature mustn't be empty ")
+    @Min(value = -60,message = "Min value must be higher than -60")
+    @Max(value = 60,message = "Man value must be smaller than 60")
     private int temperature;
 
-    @Column(name = "is_rain")
+    @NotEmpty(message = "This field mustn't be empty")
     private boolean isRain;
 
-    public MeasurementsDTO(){
+    @NotEmpty(message = "Sensor not registered")
+    private Sensor sensor;
+
+    public MeasurementsDTO() {
     }
 
-    public MeasurementsDTO(int temperature, boolean isRain) {
+    public MeasurementsDTO(Sensor sensor, int temperature, boolean isRain) {
+        this.sensor = sensor;
         this.temperature = temperature;
         this.isRain = isRain;
     }
@@ -34,5 +42,13 @@ public class MeasurementsDTO {
 
     public void setRain(boolean rain) {
         isRain = rain;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 }
