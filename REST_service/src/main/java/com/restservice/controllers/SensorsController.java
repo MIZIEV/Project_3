@@ -3,9 +3,10 @@ package com.restservice.controllers;
 import com.restservice.dto.SensorDTO;
 import com.restservice.models.Sensor;
 import com.restservice.services.SensorService;
-import com.restservice.util.SensorAlreadyExistsException;
-import com.restservice.util.SensorErrorResponse;
-import com.restservice.util.SensorRegistrationException;
+import com.restservice.util.exceptions.SensorAlreadyExistsException;
+import com.restservice.util.errorresponces.ErrorResponse;
+import com.restservice.util.exceptions.SensorRegistrationException;
+import com.restservice.util.validators.SensorDTOValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,12 @@ import java.util.List;
 public class SensorsController {
 
     private final SensorService sensorService;
+    private final SensorDTOValidator sensorDTOValidator;
 
     @Autowired
-    public SensorsController(SensorService sensorService) {
+    public SensorsController(SensorService sensorService, SensorDTOValidator sensorDTOValidator) {
         this.sensorService = sensorService;
+        this.sensorDTOValidator = sensorDTOValidator;
     }
 
     @GetMapping("/all")
@@ -49,16 +52,16 @@ public class SensorsController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<SensorErrorResponse> handleException(SensorAlreadyExistsException exception) {
-        SensorErrorResponse response = new SensorErrorResponse(
+    private ResponseEntity<ErrorResponse> handleException(SensorAlreadyExistsException exception) {
+        ErrorResponse response = new ErrorResponse(
                 "This sensor already exists!!!", System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    private ResponseEntity<SensorErrorResponse> registrationHandler(SensorRegistrationException exception) {
-        SensorErrorResponse response = new SensorErrorResponse(exception.getMessage(), System.currentTimeMillis());
+    private ResponseEntity<ErrorResponse> registrationHandler(SensorRegistrationException exception) {
+        ErrorResponse response = new ErrorResponse(exception.getMessage(), System.currentTimeMillis());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
