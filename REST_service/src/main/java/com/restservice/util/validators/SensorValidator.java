@@ -1,33 +1,32 @@
-package com.restservice.util;
+package com.restservice.util.validators;
 
-import com.restservice.dto.SensorDTO;
+import com.restservice.models.Sensor;
 import com.restservice.services.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-@Component
-public class SensorDTOValidator implements Validator {
+public class SensorValidator implements Validator {
 
     private final SensorService sensorService;
 
     @Autowired
-    public SensorDTOValidator(SensorService sensorService) {
+    public SensorValidator(SensorService sensorService) {
         this.sensorService = sensorService;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return SensorDTO.class.equals(clazz);
+        return Sensor.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        SensorDTO sensorDTO = (SensorDTO) target;
+        Sensor sensor = (Sensor) target;
 
-        if(sensorService.getSensorByName(sensorDTO.getName()).isPresent()){
-            errors.rejectValue("name","","This sensor already exists!!!");
+        if (sensorService.getSensorByName(sensor.getName()).isPresent()) {
+            errors.rejectValue("name", "", "This sensor already exists!!!!");
         }
     }
 }
