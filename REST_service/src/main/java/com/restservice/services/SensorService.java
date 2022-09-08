@@ -2,7 +2,7 @@ package com.restservice.services;
 
 import com.restservice.models.Sensor;
 import com.restservice.repositories.SensorRepository;
-import com.restservice.util.SensorAlreadyExistsException;
+import com.restservice.util.exceptions.SensorAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

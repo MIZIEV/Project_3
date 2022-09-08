@@ -1,7 +1,9 @@
 package com.restservice.services;
 
 import com.restservice.models.Measurements;
+import com.restservice.models.Sensor;
 import com.restservice.repositories.MeasurementsRepository;
+import com.restservice.util.exceptions.SensorNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,11 +26,15 @@ public class MeasurementsService {
     }
 
     @Transactional(readOnly = false)
-    public Measurements saveNewMeasurements(Measurements measurements){
-        enrichMeasurement(measurements);
-        return measurementsRepository.save(measurements);
-    }
+    public void saveNewMeasurements(Measurements measurements){
 
+        if(sensorService.getSensorByName(measurements.getSensor().getName()).isPresent()){
+        enrichMeasurement(measurements);
+        measurementsRepository.save(measurements);}
+        else{
+            throw new SensorNotFoundException();
+        }
+    }
     public void enrichMeasurement(Measurements measurements){
         measurements.setSensor(sensorService.getSensorByName(measurements.getSensor().getName()).get());
     }
