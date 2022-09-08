@@ -1,8 +1,8 @@
 package com.restservice.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,10 +16,10 @@ public class Sensor implements Serializable {
     private int id;
 
     @Column(name="name")
-
     private String name;
 
     @OneToMany(mappedBy = "sensor")
+    @JsonManagedReference
     private List<Measurements> measurementsList;
 
     public Sensor(){}
@@ -61,5 +61,10 @@ public class Sensor implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return id+") "+name;
     }
 }

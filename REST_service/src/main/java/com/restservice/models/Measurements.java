@@ -1,13 +1,15 @@
 package com.restservice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "measurement")
-public class Measurements {
+public class Measurements implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -24,6 +26,7 @@ public class Measurements {
 
     @ManyToOne
     @JoinColumn(name = "sensor_id",referencedColumnName = "id")
+    @JsonBackReference
     private Sensor sensor;
 
     public Measurements(){}
@@ -64,5 +67,10 @@ public class Measurements {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    @Override
+    public String toString() {
+        return id+") "+temperature+", "+" is rain - "+isRain;
     }
 }
