@@ -25,6 +25,10 @@ public class MeasurementsService {
         return measurementsRepository.findAll();
     }
 
+    public Integer getSumOfDaysWithRain(){
+        return measurementsRepository.getAllMeasurementsWithRain();
+    }
+
     @Transactional(readOnly = false)
     public void saveNewMeasurements(Measurements measurements){
 

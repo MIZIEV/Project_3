@@ -1,6 +1,7 @@
 package com.restservice.controllers;
 
 import com.restservice.dto.MeasurementsDTO;
+import com.restservice.models.DayWIthRain;
 import com.restservice.models.Measurements;
 import com.restservice.services.MeasurementsService;
 import com.restservice.util.errorresponces.ErrorResponse;
@@ -9,19 +10,15 @@ import com.restservice.util.validators.MeasurementDTOValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/api/measurements")
 public class MeasurementsController {
 
@@ -33,6 +30,15 @@ public class MeasurementsController {
                                   MeasurementDTOValidator measurementDTOValidator) {
         this.measurementsService = measurementsService;
         this.measurementDTOValidator = measurementDTOValidator;
+    }
+    @GetMapping("/get")
+    public List<Measurements> getAllMeasurements(){
+        return measurementsService.getAllMeasurements();
+    }
+    @GetMapping("/rain")
+    public DayWIthRain getJSONWithAllDaysWithRains(){
+        DayWIthRain response = new DayWIthRain(measurementsService.getSumOfDaysWithRain());
+        return response;
     }
 
     @PostMapping("/add")
