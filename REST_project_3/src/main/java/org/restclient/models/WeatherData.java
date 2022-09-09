@@ -1,10 +1,10 @@
-package org.example.models;
+package org.restclient.models;
 
 public class WeatherData {
     private byte temperature;
     private boolean isRain;
 
-    public WeatherData(){}
+    public WeatherData() {}
 
     public WeatherData(byte temperature, boolean isRain) {
         this.temperature = temperature;
@@ -25,5 +25,10 @@ public class WeatherData {
 
     public void setRain(boolean rain) {
         isRain = rain;
+    }
+
+    @Override
+    public String toString() {
+        return "Temperature -" + temperature + ", is rain: " + isRain;
     }
 }
