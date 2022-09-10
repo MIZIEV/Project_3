@@ -1,12 +1,16 @@
 package org.restclient.models;
 
-public class WeatherData {
+public class WeatherData implements Data {
     private byte temperature;
     private boolean isRain;
 
-    public WeatherData() {}
+    private SensorData sensor;
 
-    public WeatherData(byte temperature, boolean isRain) {
+    public WeatherData() {
+    }
+
+    public WeatherData(SensorData sensor, byte temperature, boolean isRain) {
+        this.sensor = sensor;
         this.temperature = temperature;
         this.isRain = isRain;
     }
@@ -27,8 +31,16 @@ public class WeatherData {
         isRain = rain;
     }
 
+    public SensorData getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(SensorData sensor) {
+        this.sensor = sensor;
+    }
+
     @Override
     public String toString() {
-        return "Temperature -" + temperature + ", is rain: " + isRain;
+        return sensor.getName()+")  Temperature -" + temperature + ", is rain: " + isRain;
     }
 }
