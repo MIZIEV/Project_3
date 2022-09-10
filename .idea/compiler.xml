@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="REST_service" />
-        <module name="REST_project_3" />
+        <module name="REST_client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="REST_project_3" target="17" />
+      <module name="REST_client" target="17" />
       <module name="REST_service" target="17" />
     </bytecodeTargetLevel>
   </component>

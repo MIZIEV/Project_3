@@ -14,7 +14,7 @@ public class SensorDataGenerator implements DataGenerator{
         SensorData sensorData = new SensorData();
         StringBuffer standardSensorName = new StringBuffer();
 
-        int randomDigit = randomSensorNumber.nextInt(100);
+        int randomDigit = randomSensorNumber.nextInt(500);
         standardSensorName.append("Sensor_№").append(randomDigit);
         sensorData.setName(standardSensorName.toString());
 

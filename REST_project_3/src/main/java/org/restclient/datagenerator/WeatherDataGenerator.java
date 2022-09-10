@@ -19,7 +19,7 @@ public class WeatherDataGenerator implements DataGenerator {
         int randomBetween = randomTemperature.nextInt((50 - (-50)) + 1) + (-50);
         StringBuffer standardSensorName = new StringBuffer();
 
-        int randomDigit = randomSensorNumber.nextInt(100);
+        int randomDigit = randomSensorNumber.nextInt(500);
         standardSensorName.append("Sensor_№").append(randomDigit);
 
         weatherData = new WeatherData(
