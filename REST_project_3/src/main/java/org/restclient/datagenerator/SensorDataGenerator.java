@@ -1,6 +1,5 @@
 package org.restclient.datagenerator;
 
-import org.restclient.models.Data;
 import org.restclient.models.SensorData;
 
 import java.util.Random;

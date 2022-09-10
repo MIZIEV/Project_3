@@ -3,7 +3,6 @@ package org.restclient.datagenerator;
 import org.restclient.models.Data;
 import org.restclient.models.SensorData;
 import org.restclient.models.WeatherData;
-
 import java.util.Random;
 
 public class WeatherDataGenerator implements DataGenerator {
