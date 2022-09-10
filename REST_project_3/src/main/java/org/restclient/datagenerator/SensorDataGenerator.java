@@ -1,14 +1,23 @@
 package org.restclient.datagenerator;
 
+import org.restclient.models.Data;
+import org.restclient.models.SensorData;
+
 import java.util.Random;
 
-public class SensorDataGenerator {
+public class SensorDataGenerator implements DataGenerator{
 
     private Random randomSensorNumber = new Random();
-    public StringBuffer generate() {
+
+    @Override
+    public SensorData generate() {
+        SensorData sensorData = new SensorData();
         StringBuffer standardSensorName = new StringBuffer();
+
         int randomDigit = randomSensorNumber.nextInt(100);
         standardSensorName.append("Sensor_№").append(randomDigit);
-        return standardSensorName;
+        sensorData.setName(standardSensorName.toString());
+
+        return sensorData;
     }
 }
